@@ -12,7 +12,7 @@ class ResponseRenderer(JSONRenderer):
     def render(self, data, accepted_media_type=None, renderer_context=None):
         response = renderer_context.get('response')
 
-        if response is not None and response.exception:
+        if response is not None and (response.exception or response.status_code >= 400):
             response_data = {
                 'success': False,
                 'data': None,

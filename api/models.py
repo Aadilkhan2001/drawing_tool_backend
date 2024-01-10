@@ -27,10 +27,13 @@ class Drawing(models.Model):
     """
 
     name = models.CharField(max_length=255)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     height = models.FloatField()
     width = models.FloatField()
+
+    def __str__(self) -> str:
+        return str(self.id)
 
 
 class Shape(models.Model):
@@ -47,7 +50,7 @@ class Shape(models.Model):
         - width (bool): Indicates width of the shape.
     """
 
-    drawing = models.ForeignKey(Drawing, on_delete=models.CASCADE)
+    drawing = models.ForeignKey(Drawing, on_delete=models.SET_NULL, null=True)
     shape_type = models.CharField(max_length=50, choices=SHAPE_CHOICES,)
     coordinates = models.TextField()
     dimensions = models.TextField(blank=True, null=True)
@@ -55,6 +58,8 @@ class Shape(models.Model):
     height = models.FloatField()
     width = models.FloatField()
 
+    def __str__(self) -> str:
+        return str(self.id)
 
 class Annotation(models.Model):
     """
@@ -66,6 +71,9 @@ class Annotation(models.Model):
         - position (str): The position of the annotation.
     """
 
-    shape = models.ForeignKey(Shape, on_delete=models.CASCADE)
+    shape = models.ForeignKey(Shape, on_delete=models.SET_NULL, null=True)
     text = models.TextField()
     position = models.TextField()
+
+    def __str__(self) -> str:
+        return str(self.id)

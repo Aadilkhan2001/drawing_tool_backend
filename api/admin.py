@@ -1,3 +1,7 @@
 from django.contrib import admin
 
-# Register your models here.
+from api.models import Shape, Drawing, Annotation
+
+admin.site.register(Shape)
+admin.site.register(Drawing)
+admin.site.register(Annotation)

@@ -26,8 +26,6 @@ class JwtService:
             payload = jwt.decode(token, settings.SECRET_KEY, algorithms=['HS256'])
             return payload
         except jwt.ExpiredSignatureError:
-            # Token has expired
             return {'error': 'Token has expired.'}
         except jwt.InvalidTokenError:
-            # Invalid token
             return {'error': 'Invalid token.'}
